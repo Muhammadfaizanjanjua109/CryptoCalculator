@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './style.css';
-
+import TextField from '@mui/material/TextField';
 export default function App() {
   const [modal, setModal] = React.useState({
     TotalMoneyInve: 0,
@@ -10,8 +10,8 @@ export default function App() {
     sellingRateCrypto: 0,
   });
   const [profit, setProfit] = React.useState({
-    totalMoney:null,
-    totalProfit:null
+    totalMoney: null,
+    totalProfit: null,
   });
   const handleChange = (e) => {
     const name = e.target.name;
@@ -23,30 +23,35 @@ export default function App() {
 
     const totalMoneyInvestedDollars =
       modal.TotalMoneyInve / modal.purchasingRateDollar;
- 
+
     const totalCryptoBuying =
       totalMoneyInvestedDollars / modal.purchasingRateCyrpto;
-  
+
     const totalCryptoProfit = totalCryptoBuying * modal.sellingRateCrypto;
- 
+
     const totalEarning = totalCryptoProfit * modal.sellingRateDollar;
-  
-   const totp=totalEarning-modal.TotalMoneyInve
-    setProfit((prev)=>({
-      ...prev, totalMoney:totalEarning,
-      totalProfit:totp
-    })    );
+
+    const totp = totalEarning - modal.TotalMoneyInve;
+    setProfit((prev) => ({
+      ...prev,
+      totalMoney: totalEarning,
+      totalProfit: totp,
+    }));
   };
   return (
     <div>
       <form>
         <label>Enter Total Money in RS</label>
-        <input
+        <TextField
+          id="outlined-basic"
           type="number"
           onChange={handleChange}
           value={modal.TotalMoneyInve}
           name="TotalMoneyInve"
+          label="Outlined"
+          variant="outlined"
         />
+
         <br />
         <label>Purchasing Rate Dollar</label>
         <input
@@ -80,13 +85,13 @@ export default function App() {
           value={modal.sellingRateCrypto}
           name="sellingRateCrypto"
         />
-         <button onClick={(e) => handleChangeSubmit(e)}>clear</button>
+        <button onClick={(e) => handleChangeSubmit(e)}>clear</button>
         <button onClick={(e) => handleChangeSubmit(e)}>Submit</button>
       </form>
       <p>Congratulation You Earned </p>
-      <p>{profit.totalProfit && profit.totalProfit}</p>  
+      <p>{profit.totalProfit && profit.totalProfit}</p>
       <p>Now You have total Money </p>
-      <p>{profit.totalMoney && profit.totalMoney}</p> 
+      <p>{profit.totalMoney && profit.totalMoney}</p>
     </div>
   );
 }
