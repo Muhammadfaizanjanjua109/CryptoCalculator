@@ -3,13 +3,16 @@ import './style.css';
 
 export default function App() {
   const [modal, setModal] = React.useState({
-    TotalMoneyInve: 10000,
-    purchasingRateDollar: 205,
-    purchasingRateCyrpto: 269,
-    sellingRateDollar: 220,
-    sellingRateCrypto: 305,
+    TotalMoneyInve: 0,
+    purchasingRateDollar: 0,
+    purchasingRateCyrpto: 0,
+    sellingRateDollar: 0,
+    sellingRateCrypto: 0,
   });
-  const [profit, setProfit] = React.useState(null);
+  const [profit, setProfit] = React.useState({
+    totalMoney:null,
+    totalProfit:null
+  });
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -20,16 +23,19 @@ export default function App() {
 
     const totalMoneyInvestedDollars =
       modal.TotalMoneyInve / modal.purchasingRateDollar;
-    console.log(totalMoneyInvestedDollars, 'totalMoneyInvestedDollars');
+ 
     const totalCryptoBuying =
       totalMoneyInvestedDollars / modal.purchasingRateCyrpto;
-    console.log(totalCryptoBuying, 'totalCryptoBuying');
+  
     const totalCryptoProfit = totalCryptoBuying * modal.sellingRateCrypto;
-    console.log(totalCryptoProfit, 'totalCryptoProfit');
+ 
     const totalEarning = totalCryptoProfit * modal.sellingRateDollar;
-    console.log(totalEarning, 'totalEarning');
-   
-    setProfit(totalEarning);
+  
+   const totp=totalEarning-modal.TotalMoneyInve
+    setProfit((prev)=>({
+      ...prev, totalMoney:totalEarning,
+      totalProfit:totp
+    })    );
   };
   return (
     <div>
@@ -74,10 +80,13 @@ export default function App() {
           value={modal.sellingRateCrypto}
           name="sellingRateCrypto"
         />
+         <button onClick={(e) => handleChangeSubmit(e)}>clear</button>
         <button onClick={(e) => handleChangeSubmit(e)}>Submit</button>
       </form>
-      <p>Your Answer is </p>
-      {profit && profit}
+      <p>Congratulation You Earned </p>
+      <p>{profit.totalProfit && profit.totalProfit}</p>  
+      <p>Now You have total Money </p>
+      <p>{profit.totalMoney && profit.totalMoney}</p> 
     </div>
   );
 }
