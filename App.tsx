@@ -1,14 +1,18 @@
 import * as React from 'react';
 import './style.css';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 export default function App() {
-  const [modal, setModal] = React.useState({
-    TotalMoneyInve: 0,
-    purchasingRateDollar: 0,
-    purchasingRateCyrpto: 0,
-    sellingRateDollar: 0,
-    sellingRateCrypto: 0,
-  });
+  const inital_modal = {
+    TotalMoneyInve: '',
+    purchasingRateDollar: '',
+    purchasingRateCyrpto: '',
+    sellingRateDollar: '',
+    sellingRateCrypto: '',
+  };
+  const [modal, setModal] = React.useState(inital_modal);
   const [profit, setProfit] = React.useState({
     totalMoney: null,
     totalProfit: null,
@@ -41,52 +45,88 @@ export default function App() {
   return (
     <div>
       <form>
-        <label>Enter Total Money in RS</label>
-        <TextField
-          id="outlined-basic"
-          type="number"
-          onChange={handleChange}
-          value={modal.TotalMoneyInve}
-          name="TotalMoneyInve"
-          label="Outlined"
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic"
+              type="text"
+              onChange={handleChange}
+              sx={{ paddingTop: '10px', marginTop: '20px' }}
+              value={modal.TotalMoneyInve}
+              name="TotalMoneyInve"
+              label="Enter Total Money in RS"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic"
+              type="text"
+              onChange={handleChange}
+              sx={{ paddingTop: '10px', marginTop: '20px' }}
+              value={modal.purchasingRateDollar}
+              name="purchasingRateDollar"
+              label="Purchasing Rate Dollar"
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic"
+              type="text"
+              onChange={handleChange}
+              value={modal.purchasingRateCyrpto}
+              sx={{ paddingTop: '10px', marginTop: '20px' }}
+              name="purchasingRateCyrpto"
+              label="Purchasing Rate of Crypto"
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic"
+              type="text"
+              onChange={handleChange}
+              value={modal.sellingRateDollar}
+              sx={{ paddingTop: '10px', marginTop: '20px' }}
+              name="sellingRateDollar"
+              label="Selling Rate of Dollar"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-basic"
+              type="text"
+              onChange={handleChange}
+              value={modal.sellingRateCrypto}
+              sx={{ paddingTop: '10px', marginTop: '20px' }}
+              name="sellingRateCrypto"
+              label="Selling Rate of Crypto"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}   sx={{ paddingTop: '10px', marginTop: '40px' }}>
+          <Button
           variant="outlined"
-        />
+          color="error"
+          onClick={() => setModal(inital_modal)}
+        >
+          Clear
+        </Button>
+        <Button
+          variant="outlined"
+          color="success"
+          onClick={(e) => handleChangeSubmit(e)}
+        >
+          Submit
+        </Button>
+          </Grid>
+        </Grid>
 
-        <br />
-        <label>Purchasing Rate Dollar</label>
-        <input
-          type="number"
-          onChange={handleChange}
-          value={modal.purchasingRateDollar}
-          name="purchasingRateDollar"
-        />
-        <br />
 
-        <label>Purchasing Rate of Crypto</label>
-        <input
-          type="number"
-          onChange={handleChange}
-          value={modal.purchasingRateCyrpto}
-          name="purchasingRateCyrpto"
-        />
-        <br />
-        <label>Selling Rate of Dollar</label>
-        <input
-          type="number"
-          onChange={handleChange}
-          value={modal.sellingRateDollar}
-          name="sellingRateDollar"
-        />
-        <br />
-        <label>Selling Rate of Crypto</label>
-        <input
-          type="number"
-          onChange={handleChange}
-          value={modal.sellingRateCrypto}
-          name="sellingRateCrypto"
-        />
-        <button onClick={(e) => handleChangeSubmit(e)}>clear</button>
-        <button onClick={(e) => handleChangeSubmit(e)}>Submit</button>
       </form>
       <p>Congratulation You Earned </p>
       <p>{profit.totalProfit && profit.totalProfit}</p>
