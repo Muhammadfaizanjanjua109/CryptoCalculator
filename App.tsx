@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 export default function App() {
   const inital_modal = {
     TotalMoneyInve: '',
@@ -44,6 +45,9 @@ export default function App() {
   };
   return (
     <div>
+      <Typography variant="h4" component="h4" textAlign={'center'} color={'green'}>
+ Enter Details of Play
+</Typography>
       <form>
         <Grid container spacing={2}>
           <Grid item xs={6}>
