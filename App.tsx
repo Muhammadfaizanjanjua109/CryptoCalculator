@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import './style.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -13,11 +14,13 @@ export default function App() {
     sellingRateDollar: '',
     sellingRateCrypto: '',
   };
+  let color = '';
   const [modal, setModal] = React.useState(inital_modal);
   const [profit, setProfit] = React.useState({
     totalMoney: null,
     totalProfit: null,
   });
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -43,14 +46,21 @@ export default function App() {
       totalProfit: totp,
     }));
   };
+  console.log('color', color);
+
   return (
     <div>
-      <Typography variant="h4" component="h4" textAlign={'center'} color={'green'}>
- Enter Details of Play
-</Typography>
+      <Typography
+        variant="h4"
+        component="h4"
+        textAlign={'center'}
+        color={'green'}
+      >
+        Enter Details of Play
+      </Typography>
       <form>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={6} md={4} sm={4} xl={2}>
             <TextField
               id="outlined-basic"
               type="text"
@@ -62,7 +72,7 @@ export default function App() {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} md={4} sm={4} xl={2}>
             <TextField
               id="outlined-basic"
               type="text"
@@ -75,7 +85,7 @@ export default function App() {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={6} md={4} sm={4} xl={2}>
             <TextField
               id="outlined-basic"
               type="text"
@@ -88,7 +98,7 @@ export default function App() {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={6} md={4} sm={4} xl={2}>
             <TextField
               id="outlined-basic"
               type="text"
@@ -100,7 +110,7 @@ export default function App() {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} md={4} sm={4} xl={2}>
             <TextField
               id="outlined-basic"
               type="text"
@@ -112,29 +122,48 @@ export default function App() {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6}   sx={{ paddingTop: '10px', marginTop: '40px' }}>
-          <Button
-          variant="outlined"
-          color="error"
-          onClick={() => setModal(inital_modal)}
-        >
-          Clear
-        </Button>
-        <Button
-          variant="outlined"
-          color="success"
-          onClick={(e) => handleChangeSubmit(e)}
-        >
-          Submit
-        </Button>
+          <Grid
+            item
+            xs={6}
+            md={4}
+            sm={4}
+            xl={2}
+            sx={{ paddingTop: '10px', marginTop: '40px' }}
+          >
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => setModal(inital_modal)}
+              sx={{ marginRight: '10px' }}
+            >
+              Clear
+            </Button>
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={(e) => handleChangeSubmit(e)}
+            >
+              Submit
+            </Button>
           </Grid>
         </Grid>
-
-
       </form>
-      <p>Congratulation You Earned </p>
+      {profit.totalProfit != '' && (
+        <Typography
+          variant="p"
+          component="p"
+          color={profit.totalProfit >  0?'green':'red'}
+        
+        >
+        {profit.totalProfit > 0 ? 
+         <> Congratulation You Earned </>
+         :   
+          <>  Unfortunatily you have Lost   </> 
+         }
+        </Typography>
+      ) }
       <p>{profit.totalProfit && profit.totalProfit}</p>
-      <p>Now You have total Money </p>
+      {profit.totalMoney && <p>Now You have total Money </p>}
       <p>{profit.totalMoney && profit.totalMoney}</p>
     </div>
   );
