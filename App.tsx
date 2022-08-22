@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 
 import './style.css';
 import TextField from '@mui/material/TextField';
@@ -152,16 +153,15 @@ export default function App() {
         <Typography
           variant="p"
           component="p"
-          color={profit.totalProfit >  0?'green':'red'}
-        
+          color={profit.totalProfit > 0 ? 'green' : 'red'}
         >
-        {profit.totalProfit > 0 ? 
-         <> Congratulation You Earned </>
-         :   
-          <>  Unfortunatily you have Lost   </> 
-         }
+          {profit.totalProfit > 0 ? (
+            <> Congratulation You Earned </>
+          ) : (
+            <> Unfortunatily you have Lost </>
+          )}
         </Typography>
-      ) }
+      )}
       <p>{profit.totalProfit && profit.totalProfit}</p>
       {profit.totalMoney && <p>Now You have total Money </p>}
       <p>{profit.totalMoney && profit.totalMoney}</p>
